@@ -49,7 +49,7 @@ body{
 
 .spinner-loading{
   height: 100%;
-  background: #f2dac2c2;
+  background: #f2dac2ab;
   position: absolute;
   z-index: 100;
   width: 100%;

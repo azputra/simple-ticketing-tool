@@ -4,7 +4,7 @@ import { TicketContextType } from '../@types/ticket';
 import { TicketContext } from '../context/ticketContext';
 
 const Login : FC = () => {
-    const { setupLoading } = useContext(TicketContext) as TicketContextType;
+    const { setupLoading, loading } = useContext(TicketContext) as TicketContextType;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [show, setShow] = useState(true);
@@ -47,6 +47,14 @@ const Login : FC = () => {
           </div>
           : ''
         }
+        {
+        loading? 
+        <div className="flex justify-center items-center spinner-loading">
+          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div> : ''
+      }
         <div className='w-full max-w-lg px-10 py-8 mx-auto my-32 bg-white rounded-lg shadow-xl'>
           <div className='max-w-md mx-auto space-y-6'>
             <form onSubmit={e=>submitForm(e)}>

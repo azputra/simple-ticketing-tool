@@ -7,7 +7,7 @@ import EditTicket from '../components/EditTicket';
 import DeleteTicket from '../components/DeleteTicket';
 
 const Detail : FC = () => {
-  const { tickets, removeTicket, setupLoading } = useContext(TicketContext) as TicketContextType;
+  const { tickets, removeTicket, setupLoading, loading } = useContext(TicketContext) as TicketContextType;
   const params = useParams();
   const navigate = useNavigate();
   const [ticketDetail, setTicketDetail] = useState({
@@ -49,6 +49,14 @@ const Detail : FC = () => {
   
   return (
     <>
+      {
+        loading? 
+        <div className="flex justify-center items-center spinner-loading">
+          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div> : ''
+      }
       <div className="flex justify-center pt-24 animate__animated animate__pulse">
         {
           alertActive === 'competed to progress' ?
