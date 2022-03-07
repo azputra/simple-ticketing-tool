@@ -22,8 +22,10 @@ const Detail : FC = () => {
 
   const deleteTicket = () => {
     setupLoading()
-    removeTicket(Number(ticketDetail.id))
-    navigate('/')
+    setTimeout(() => {
+      removeTicket(Number(ticketDetail.id))
+      navigate('/')
+    }, 2000);
   }
 
   useEffect(() => {

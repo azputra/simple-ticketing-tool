@@ -14,10 +14,12 @@ const Login : FC = () => {
     
     const submitForm = (e:any) =>{
         e.preventDefault();
-        setupLoading()
         if (email === "test@vroom.com.au" && password === "frontendtest2022") {
-          localStorage.setItem('user', JSON.stringify(email))
-          navigate('/');
+          setupLoading()
+          setTimeout(() => {
+            localStorage.setItem('user', JSON.stringify(email))
+            navigate('/');
+          }, 2000);
         } else {
             setAlert(true);
             if (email === "") {
