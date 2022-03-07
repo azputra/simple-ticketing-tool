@@ -31,15 +31,9 @@ const EditTicket : FC<Props> = ({ticketDetail, setAlertActive}) => {
     setTimeout(() => {
       if (ticketDetail.status === 'completed' && formData.status === 'in progress') {
           setAlertActive('competed to progress')
-          setTimeout(() => {
-              setAlertActive('')
-          }, 3000);
       } else {
           if (formData.title !== '') updateTicket(formData);
           setAlertActive('success')
-          setTimeout(() => {
-              setAlertActive('')
-          }, 3000);
       }
     }, 2000);
     resetForm()

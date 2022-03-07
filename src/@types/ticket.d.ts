@@ -18,4 +18,6 @@ export type TicketContextType = {
   loading: boolean;
   setupLoading: () => void;
   removeTicket: (id:number) => void;
+  setupAlert: (message:string) => void;
+  alertMessage: string;
 };

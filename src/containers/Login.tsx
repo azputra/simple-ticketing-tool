@@ -4,11 +4,10 @@ import { TicketContextType } from '../@types/ticket';
 import { TicketContext } from '../context/ticketContext';
 
 const Login : FC = () => {
-    const { setupLoading, loading } = useContext(TicketContext) as TicketContextType;
+    const { setupLoading, loading, setupAlert, alertMessage } = useContext(TicketContext) as TicketContextType;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [show, setShow] = useState(true);
-    const [alertMessage, setAllertMEssage] = useState("");
     const [alert, setAlert] = useState(false);
     const navigate = useNavigate();
     
@@ -21,24 +20,29 @@ const Login : FC = () => {
             navigate('/');
           }, 2000);
         } else {
-            setAlert(true);
             if (email === "") {
-              setAllertMEssage("Please Input Email");
+              setupAlert("Please Input Email");
             } else if (password === "") {
-              setAllertMEssage("Please Input Password");
+              setupAlert("Please Input Password");
             } else {
-              setAllertMEssage("Email or Password Wrong");
+              setupAlert("Email or Password Wrong");
             }
-            setTimeout(() => {
-                setAlert(false);
-            }, 2000);
         }
     }
 
   return (
+    <>
+      {
+        loading? 
+        <div className="flex justify-center items-center spinner-loading transition duration-150 ease-in-out focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg h-full">
+          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div> : ''
+      }
       <div className='flex items-center justify-center p-3'>
         {
-            alert ? 
+            alertMessage !== '' ? 
             <div className="bg-red-100 top-10 rounded-lg animate__animated animate__tada py-5 px-6 mb-3 text-base text-red-700 inline-flex items-center z-10 absolute justify-center" role="alert">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" className="w-4 h-4 mr-2 fill-current" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
@@ -47,14 +51,6 @@ const Login : FC = () => {
           </div>
           : ''
         }
-        {
-        loading? 
-        <div className="flex justify-center items-center spinner-loading transition duration-150 ease-in-out focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg">
-          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div> : ''
-      }
         <div className='w-full max-w-lg px-10 py-8 mx-auto my-32 bg-white rounded-lg shadow-xl'>
           <div className='max-w-md mx-auto space-y-6'>
             <form onSubmit={e=>submitForm(e)}>
@@ -77,6 +73,7 @@ const Login : FC = () => {
           </div>
         </div>
       </div>
+    </>
   );
 }
 

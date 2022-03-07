@@ -46,7 +46,6 @@ const Tickets : FC = () => {
                   <Droppable droppableId={`${list.id}`}>
                       {({ droppableProps, innerRef, placeholder }) => (
                         <div key={i} className='list-status w-full min-w-px350' ref={innerRef} {...droppableProps}>
-                          {console.log(list.id)}
                           <div className='px-5 bg-slate-100 h-full overflow-y-auto max-h-full rounded-lg min-h-0 min-h-70' >
                             <p className='text-lg sticky top-0 bg-slate-100 pt-3 uppercase font-semibold'>{list.list}</p>
                             {tickets.map((ticket: ITicket, j) => (

@@ -5,8 +5,8 @@ export const TicketContext = createContext<TicketContextType | null>(null);
 
 const TicketProvider: FC<ReactNode> = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
   const [list] = useState<IList[]>([{id:1, list:'open'}, {id:2, list:'in progress'}, {id:3, list:'completed'}]);
-
   const [tickets, setTickets] = useState<ITicket[]>([
     {
       id:1,
@@ -65,13 +65,20 @@ const TicketProvider: FC<ReactNode> = ({ children }) => {
     })
   };
 
+  const setupAlert = (message:string) => {
+    setAlertMessage(message)
+    setTimeout(() => {
+      setAlertMessage('')
+    }, 2000);
+  };
+
   const removeTicket = (id:number) => { 
     const index = tickets.findIndex(key => key.id === id);
     tickets.splice(index,1);
     setTickets([...tickets])
   };
 
-  return <TicketContext.Provider value={{ tickets, saveTicket, updateStatusTicket, updateTicket, list, loading, setupLoading, removeTicket }}>{children}</TicketContext.Provider>;
+  return <TicketContext.Provider value={{ tickets, saveTicket, updateStatusTicket, updateTicket, list, loading, setupLoading, removeTicket, setupAlert, alertMessage }}>{children}</TicketContext.Provider>;
 };
 
 export default TicketProvider;
