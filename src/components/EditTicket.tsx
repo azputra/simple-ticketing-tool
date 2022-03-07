@@ -10,7 +10,7 @@ type Props = {
   };
 
 const EditTicket : FC<Props> = ({ticketDetail, setAlertActive}) => {
-  const { updateTicket } = useContext(TicketContext) as TicketContextType;
+  const { updateTicket, setupLoading } = useContext(TicketContext) as TicketContextType;
   const [formData, setFormData] = useState({
     id: ticketDetail.id,
     title: ticketDetail.title,
@@ -27,18 +27,21 @@ const EditTicket : FC<Props> = ({ticketDetail, setAlertActive}) => {
 
   const handleEditTikcet = (e: FormEvent, formData: ITicket | any) => {
     e.preventDefault();
-    if (ticketDetail.status === 'completed' && formData.status === 'in progress') {
-        setAlertActive('competed to progress')
-        setTimeout(() => {
-            setAlertActive('')
-        }, 3000);
-    } else {
-        if (formData.title !== '') updateTicket(formData);
-        setAlertActive('success')
-        setTimeout(() => {
-            setAlertActive('')
-        }, 3000);
-    }
+    setupLoading()
+    setTimeout(() => {
+      if (ticketDetail.status === 'completed' && formData.status === 'in progress') {
+          setAlertActive('competed to progress')
+          setTimeout(() => {
+              setAlertActive('')
+          }, 3000);
+      } else {
+          if (formData.title !== '') updateTicket(formData);
+          setAlertActive('success')
+          setTimeout(() => {
+              setAlertActive('')
+          }, 3000);
+      }
+    }, 2000);
     resetForm()
   };
 

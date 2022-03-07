@@ -5,7 +5,7 @@ import { TicketContextType, ITicket } from '../@types/ticket';
 import Form from './Form';
 
 const AddTikcet : FC = () => {
-  const { saveTicket } = useContext(TicketContext) as TicketContextType;
+  const { saveTicket, setupLoading } = useContext(TicketContext) as TicketContextType;
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -21,7 +21,10 @@ const AddTikcet : FC = () => {
 
   const handleSaveTikcet = (e: FormEvent, formData: ITicket | any) => {
     e.preventDefault();
-    if (formData.title !== '') saveTicket(formData);
+    setupLoading()
+    setTimeout(() => {
+      if (formData.title !== '') saveTicket(formData);
+    }, 2000);
     resetForm()
   };
 

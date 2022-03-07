@@ -51,7 +51,7 @@ const Detail : FC = () => {
     <>
       {
         loading? 
-        <div className="flex justify-center items-center spinner-loading">
+        <div className="flex justify-center items-center spinner-loading transition duration-150 ease-in-out focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg">
           <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
