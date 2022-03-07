@@ -5,7 +5,7 @@ import { TicketContextType, ITicket } from '../@types/ticket';
 import Form from './Form';
 
 const AddTikcet : FC = () => {
-  const { saveTicket, setupLoading } = useContext(TicketContext) as TicketContextType;
+  const { saveTicket, setupLoading, setupAlert } = useContext(TicketContext) as TicketContextType;
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -24,6 +24,7 @@ const AddTikcet : FC = () => {
     setupLoading()
     setTimeout(() => {
       if (formData.title !== '') saveTicket(formData);
+      else setupAlert('Please input Title');
     }, 2000);
     resetForm()
   };
